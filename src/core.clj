@@ -1,0 +1,1 @@
+(ns core (:require [fail :as fail]))
