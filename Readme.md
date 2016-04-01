@@ -23,16 +23,9 @@ Eventually the REPL will timeout.
 `deref` ing of futures will block indefinitely.
 
 ```clj
-(let [cnt     (atom 0)
-      size    5
-      open    (fn open [] (let [x (swap! cnt inc)] (println "new thing\n" x) x))
-      openers (doall
-               (map (fn open-pool [_]
-                      (future (open)))
-                    (range size)))]
-  (println "before block-start")
-  (doseq [worker openers] @worker)
-  (println "after block-start"))
+(println "lets make a thing...")
+(deref (future #(println "making a thing")))
+(println "thing is made")
 ```
 
 If another namespace like `core` in this repo requires namespaces
